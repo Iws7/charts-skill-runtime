@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0",
+  "defaultTheme": "executive-red",
+  "aliases": {
+    "executive_red": "executive-red",
+    "smart_blue": "smart-blue",
+    "business": "executive-red"
+  },
+  "shared": {
+    "semantic-up": "#D64545",
+    "semantic-up-bg": "#FDE8E8",
+    "semantic-down": "#1B6E3C",
+    "semantic-down-bg": "#EAF5EA",
+    "semantic-warn": "#B26A00",
+    "semantic-warn-bg": "#FEF3D6",
+    "surface-subtle": "#FAFAFA",
+    "surface-muted": "#F5F5F3",
+    "table-column-emphasis-bg": "#EAF1FB",
+    "border-strong": "#E3E3DF",
+    "ink-strong": "#171717",
+    "ink-muted": "#737373",
+    "chart-series-1": "#4E79A7",
+    "chart-series-2": "#F28E2B",
+    "chart-series-3": "#E15759",
+    "chart-series-4": "#76B7B2",
+    "chart-series-5": "#59A14F",
+    "chart-series-6": "#EDC948",
+    "chart-series-7": "#B07AA1",
+    "chart-series-8": "#FF9DA7"
+  },
+  "themes": {
+    "executive-red": {
+      "label": "经典领航红",
+      "tokens": {
+        "brand-primary": "#C91717",
+        "brand-soft-bg": "#FFF9F9",
+        "meta-header-end": "#9E1010"
+      }
+    },
+    "smart-blue": {
+      "label": "智眸科技蓝",
+      "tokens": {
+        "brand-primary": "#2F54EB",
+        "brand-soft-bg": "#F8FAFF",
+        "meta-header-end": "#1D39C4"
+      }
+    }
+  }
+}
