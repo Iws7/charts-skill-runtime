@@ -21,7 +21,7 @@
     const categories = grouped || combo ? Array.from(new Set(d.points.map(p => p[0]))) : d.points.map(p => p[0]);
     const values = d.points.map(p => p[1]);
     const category = {type: 'category', data: categories, inverse: horizontal,
-      axisLabel: {color: d.tokens['ink-muted'], width: horizontal ? 115 : 85, overflow: 'truncate', interval: horizontal ? 0 : 'auto', hideOverlap: true},
+      axisLabel: {color: d.tokens['ink-muted'], width: horizontal ? 115 : 85, overflow: 'truncate', interval: horizontal ? 0 : 'auto', hideOverlap: false},
       axisTick: {show: false}, axisLine: {lineStyle: {color: d.tokens['border-strong']}}};
     const value = {type: 'value', name: '', splitNumber: 4, axisLabel: {hideOverlap: true, color: d.tokens['ink-muted'], formatter: v => format(v, d)},
       splitLine: {lineStyle: {color: d.tokens['border-strong']}}, scale: d.chartType === 'line' || d.chartType === 'scatter'};
@@ -183,7 +183,10 @@
         splitLine: {show: false}, scale: true};
       const lineLookup = new Map();
       for (const p of d.points) {
-        const key = comboGrouped ? p[0] : p[0];
+        const key = p[0];
+        if (lineLookup.has(key) && lineLookup.get(key) !== p[2]) {
+          throw new Error('分组组合图同一类别的折线值不一致');
+        }
         if (!lineLookup.has(key)) lineLookup.set(key, p[2]);
       }
       let barSeries;
@@ -212,7 +215,7 @@
         const idx = params[0].dataIndex;
         const lines = [categories[idx]];
         for (const p of params) {
-          const isLine = p.seriesName === d.secondLabel;
+          const isLine = p.seriesIndex === barSeries.length;
           const v = isLine ? formatAs(p.value, d.y2Unit, d.y2Scale) : formatAs(p.value, d.unit, d.scale);
           lines.push(p.marker + p.seriesName + '：' + v);
         }
@@ -233,7 +236,7 @@
     function resize() {
       if (disposed || !container.clientWidth || !container.clientHeight) return;
       try {
-        if (!global.echarts) throw new Error('ECharts 离线资源未加载');
+        if (!global.echarts) throw new Error('ECharts 资源未加载');
         if (!instance) {
           container.textContent = '';
           instance = global.echarts.init(container, null, {renderer: 'svg'});
